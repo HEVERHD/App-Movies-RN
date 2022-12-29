@@ -17,7 +17,7 @@ export default function HorizontalSlider({ title, movies }: Props) {
              
              }}>
             {title && (
-                <Text style={{ fontSize: 30, fontWeight: 'bold', marginLeft:10 }}>{title}</Text>
+                <Text style={{ fontSize: 30, fontWeight: 'bold', marginLeft:10, color:"#b8b8b8" }}>{title}</Text>
             )}
     
             <FlatList
