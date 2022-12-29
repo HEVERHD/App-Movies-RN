@@ -23,7 +23,9 @@ export default function MovieCard({ movie, height = 420, width = 300 }: Props) {
             style={{
                 height,
                 width,
-                marginHorizontal: 7,
+                marginHorizontal: 1,
+                paddingBottom:20,
+                paddingHorizontal:10,
                 // backgroundColor:"red"
             }}>
             <View style={styles.imageContainer}>
