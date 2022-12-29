@@ -7,6 +7,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import { useMovies } from '../hooks/useMovies';
 import MovieCard from '../components/MovieCard';
 import HorizontalSlider from '../components/HorizontalSlider';
+import Gradient from '../components/Gradient';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -29,39 +30,43 @@ export default function HomeScreenPrueba() {
     }
 
     return (
-        <ScrollView>
-            <View style={{ marginTop: top + 20 }}>
-                {/* height added to show shadowbox entirely  */}
-                <View style={{ height: 440 }}>
-                    <Carousel
-                        mode="parallax"
-                        style={{
-                            width: windowWidth,
-                            justifyContent: 'center',
-                        }}
-                        pagingEnabled={false}
-                        windowSize={2}
-                        snapEnabled
-                        width={300}
-                        height={420}
-                        modeConfig={{
-                            parallaxScrollingScale: 0.9,
+        <Gradient>
+            <ScrollView>
+                <View style={{ marginTop: top + 20 }}>
+                    {/* height added to show shadowbox entirely  */}
+                    <View style={{ height: 440 }}>
+                        <Carousel
+                            mode="parallax"
+                            style={{
+                                width: windowWidth,
+                                justifyContent: 'center',
+                            }}
+                            pagingEnabled={false}
+                            windowSize={2}
+                            snapEnabled
+                            width={300}
+                            height={420}
+                            modeConfig={{
+                                parallaxScrollingScale: 0.9,
 
-                            parallaxScrollingOffset: 40,
+                                parallaxScrollingOffset: 40,
 
-                            parallaxAdjacentItemScale: 0.75,
-                        }}
-                        data={nowPlaying}
-                        renderItem={({ item }) => <MovieCard movie={item} />}
-                    />
+                                parallaxAdjacentItemScale: 0.75,
+                            }}
+                            data={nowPlaying}
+                            renderItem={({ item }) => (
+                                <MovieCard movie={item} />
+                            )}
+                        />
+                    </View>
+
+                    {/* Peliculas Populares */}
+
+                    <HorizontalSlider title="Populares" movies={popular} />
+                    <HorizontalSlider title="Top Rated" movies={topRated} />
+                    <HorizontalSlider title="Estrenos" movies={upcoming} />
                 </View>
-
-                {/* Peliculas Populares */}
-
-                <HorizontalSlider title="Populares" movies={popular} />
-                <HorizontalSlider title="Top Rated" movies={topRated} />
-                <HorizontalSlider title="Estrenos" movies={upcoming} />
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </Gradient>
     );
 }

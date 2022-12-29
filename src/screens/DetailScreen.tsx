@@ -38,6 +38,7 @@ export default function DetailScreen({ route, navigation }: Props) {
       }
         </View>
 
+
         {/* BOTON PARA IR ATRAS */}
       <TouchableOpacity 
        style={styles.backButton}
@@ -53,7 +54,6 @@ export default function DetailScreen({ route, navigation }: Props) {
         />
 
       </TouchableOpacity>
-
         </ScrollView>
     );
 }
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         fontWeight:"bold"
     },
     backButton:{
+        
         position:"absolute",
         zIndex:999,
         elevation:9,

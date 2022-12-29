@@ -15,5 +15,14 @@ module.exports = {
         'no-undef': 'off',
       },
     },
+    {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "parser": "flow"
+        }
+      ]
+    }
   ],
 };
