@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, ActivityIndicator, Dimensions, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -8,13 +8,31 @@ import { useMovies } from '../hooks/useMovies';
 import MovieCard from '../components/MovieCard';
 import HorizontalSlider from '../components/HorizontalSlider';
 import Gradient from '../components/Gradient';
+import { getCardColorsImg } from '../helpers/getColores';
+import { GradientContext } from '../context/GradientContext';
+import { useEffect } from 'react';
 
 const { width: windowWidth } = Dimensions.get('window');
 
 export default function HomeScreenPrueba() {
     const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
-
     const { top } = useSafeAreaInsets();
+
+    const { setMainColors } = useContext(GradientContext);
+
+    const getCardColors = async (index: number) => {
+        const movie = nowPlaying[index];
+        const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+        const [primary = 'green', secondary = 'orange'] =
+            await getCardColorsImg(uri);
+        setMainColors({ primary, secondary });
+    };
+// funcion efecto para traer el color cuando carga la la APP
+    useEffect(() => {
+        if (nowPlaying.length > 0) {
+            getCardColors(0);
+        }
+    }, [nowPlaying]);
 
     if (isLoading) {
         return (
@@ -36,6 +54,7 @@ export default function HomeScreenPrueba() {
                     {/* height added to show shadowbox entirely  */}
                     <View style={{ height: 440 }}>
                         <Carousel
+                            onSnapToItem={index => getCardColors(index)}
                             mode="parallax"
                             style={{
                                 width: windowWidth,
